@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap:20px;
+        margin:20px;
+        /* margin-top: 50px; */
+    }
+</style>
+<body>
+    <h1>EXPENSE TRACKER</h1>
+    <form>
+        <input id="month" type="month" placeholder="Month">
+        <br>
+        <br>
+        <input id="income" type="number" placeholder="income">
+        <br>
+        <br>
+        <input id="expense" type="number" placeholder="expense">
+        <br>
+        <br>
+    
+        <input type="submit" value="save"/>
+    </form>
+    <div id="container">
+
+    </div>
+    
+</body>
+<script>
+   document.querySelector('form').addEventListener('submit',addTrack);
+   var trackData=[
+    //    {
+    //        Month:'july',
+    //        Income:'1200',
+    //        Expense:'1300';
+    //    }
+   ];
+   function addTrack(){
+        event.preventDefault();
+        var td={
+            month:document.querySelector('#month').value,
+            income:document.querySelector('#income').value,
+            expense:document.querySelector('#expense').value
+        }
+        trackData.push(td);
+        dis(trackData)
+   }
+   function dis(trackData){
+        document.querySelector('#container').innerText=''
+        trackData.forEach(function(abc){
+            var box=document.createElement('div');
+            var month=document.createElement('div');
+            var income=document.createElement('div');
+            var expense=document.createElement('div');
+            month.innerText=abc.month;
+            income.innerText=abc.income;
+            expense.innerText=abc.expense;
+            box.append(month,income,expense);
+            document.querySelector('#container').append(box);
+            // document.querySelector('#container').style.display=grid;
+        })
+   }
+</script>
+</html>
