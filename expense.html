@@ -14,6 +14,9 @@
         margin:20px;
         /* margin-top: 50px; */
     }
+    #container>div{
+        background-color: lightblue;
+    }
 </style>
 <body>
     <h1>EXPENSE TRACKER</h1>
@@ -36,14 +39,33 @@
     
 </body>
 <script>
+    var trackData=[];
+          if(JSON.parse(localStorage.getItem('abcde'))!==null){
+               var ab=JSON.parse(localStorage.getItem('abcde'))
+               trackData.push(ab)
+           document.querySelector('#container').innerText=''
+        ab.forEach(function(abc){
+            var box=document.createElement('div');
+            var month=document.createElement('div');
+            var income=document.createElement('div');
+            var expense=document.createElement('div');
+            month.innerText=abc.month;
+            income.innerText=abc.income;
+            expense.innerText=abc.expense;
+            box.append(month,income,expense);
+            document.querySelector('#container').append(box);
+            // document.querySelector('#container').style.display=grid;
+        })
+       
+          }
    document.querySelector('form').addEventListener('submit',addTrack);
-   var trackData=[
-    //    {
-    //        Month:'july',
-    //        Income:'1200',
-    //        Expense:'1300';
-    //    }
-   ];
+//    var trackData=[
+//     //    {
+//     //        Month:'july',
+//     //        Income:'1200',
+//     //        Expense:'1300';
+//     //    }
+//    ];
    function addTrack(){
         event.preventDefault();
         var td={
@@ -53,6 +75,7 @@
         }
         trackData.push(td);
         dis(trackData)
+       localStorage.setItem('abcde',JSON.stringify(trackData));
    }
    function dis(trackData){
         document.querySelector('#container').innerText=''
